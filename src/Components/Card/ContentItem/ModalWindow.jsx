@@ -4,6 +4,7 @@ import "./ModalWidow.css";
 class ModalWindow extends React.Component {
   state = {
     investment_amount: "",
+    id: this.props.selectedBlock.id,
     title: this.props.selectedBlock.title,
     available: this.props.selectedBlock.available,
     term_remaining: this.props.selectedBlock.term_remaining,
@@ -18,10 +19,11 @@ class ModalWindow extends React.Component {
   saveBlock = (e) =>{
     e.preventDefault()
     const block = {
-      available: this.state.investment_amount
+      id: this.state.id,
+      invested: this.state.investment_amount
     }
 
-    this.props.editSelectBlock(block)
+    this.props.editSelectBlock(block);
   }
 
   render() {
@@ -29,7 +31,7 @@ class ModalWindow extends React.Component {
     return (
       <>
         <div className="modal-widdow">
-          <form action="" className="form-items">
+          <form action="" className="form-items" onSubmit={e => this.saveBlock(e)}>
             <div>
               <button type="button" className="cross" onClick={() => hideWindow()}>
                 &#10006;
@@ -46,7 +48,8 @@ class ModalWindow extends React.Component {
             </div>
             <div className="loan-terms">
               <p>
-                Loan ends in: 1 <span>{this.state.term_remaining}</span> 10 days
+                Loan ends in: <span>{this.state.term_remaining}</span>
+                {/* didn't get how to interpret this value */}
               </p>
             </div>
             <div> </div>
@@ -56,16 +59,18 @@ class ModalWindow extends React.Component {
             <div className="input-button">
               <div>
                 <input
-                  type="text"
+                  type="number"
                   name="sum"
                   placeholder="1000"
+                  min={1}
+                  max={this.state.available}
                   value={this.state.investment_amount}
                   onChange={this.handleInvest}
                   required
                 />
               </div>
               <div>
-                <button type="button" className="button" onClick={() => hideWindow()}>
+                <button type="submit" className="button">
                   <p>invest</p>
                 </button>
               </div>

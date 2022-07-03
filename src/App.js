@@ -8,7 +8,6 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <hr />
       <div className="main">
         <MainContent />
       </div>

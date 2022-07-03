@@ -1,10 +1,6 @@
-
-
-
-
 .main-items{
-    border: 1px solid #303247;
-    border-radius: 5px;
+    border: 1px solid rgba(48, 50, 71, 0.1);
+    border-radius: 16px;
     width: 612px;
     height: auto;
     margin: 0;
@@ -34,6 +30,13 @@
     flex-direction: column;
     justify-content: end;
     
+}
+
+.main-btn .invested {
+    text-align: right;
+    color: #51A571;
+    font-weight: 600;
+    margin-bottom: 12px;
 }
 
 .button{

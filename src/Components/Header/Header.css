@@ -1,6 +1,7 @@
 .header {
   margin: 0;
   padding: 0;
+  border-bottom: 1px solid rgba(48, 50, 71, 0.1);
 }
 
 .title {

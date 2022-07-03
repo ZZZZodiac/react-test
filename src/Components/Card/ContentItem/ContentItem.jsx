@@ -8,6 +8,8 @@ const ContentItem = (props) => {
     props.showWindow();
   }
 
+  let invested = props.isInvested ? <span>Invested</span> : null;
+
   return (
     <div className="main-items">
       <div className="main-item">
@@ -19,7 +21,7 @@ const ContentItem = (props) => {
             <p>Tranche: {props.tranche}</p>
           </div>
           <div>
-            <p>Available: {props.available}</p>
+            <p>Available: ${props.available}</p>
           </div>
           <div>
             <p>Annualised return: {props.annualised_return}</p>
@@ -28,10 +30,13 @@ const ContentItem = (props) => {
             <p>Lifetime Value: {props.ltv}</p>
           </div>
           <div>
-            <p>Amount: {props.amount}</p>
+            <p>Amount: ${props.amount}</p>
           </div>
         </div>
         <div className="main-btn">
+          <div className="invested">
+            {invested}
+          </div>
           <button
             onClick={showEditWindow}
             type="button"

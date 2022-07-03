@@ -65,6 +65,7 @@
 }
 
 .input-button input {
+  text-align: right;
   height: 46px;
   width: 328px;
   margin: 0;

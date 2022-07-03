@@ -27,9 +27,8 @@ class MainContent extends React.Component {
 
   hideWindow = () => {
     this.setState((state) => {
-      return {
-        showWindow: false,
-      };
+      state.showWindow = false;
+      return state;
     });
   };
 
@@ -49,19 +48,17 @@ class MainContent extends React.Component {
 
   handleSelectBlock = (block) => {
     this.setState((state) => {
-      return {
-        selectedBlock: block,
-      };
+      state.selectedBlock = block;
+      return state;
     });
   };
 
   editSelectBlock = (updateBlock) => {
-    const temp = [...this.state.loansArr];
-    temp = updateBlock;
-    console.log(temp);
-    this.this.setState({
-      loansArr: temp,
-    });
+    const loan = this.state.loansArr.find(elem => elem.id === updateBlock.id);
+    loan.available = loan.available - updateBlock.invested;
+    loan.isInvested = true;
+    this.setState((state) => state);
+    this.hideWindow();
   };
 
   render() {
@@ -75,6 +72,7 @@ class MainContent extends React.Component {
           annualised_return={item.annualised_return}
           ltv={item.ltv}
           amount={item.amount}
+          isInvested={item.isInvested}
           showWindow={() => this.showWindow()}
           handleSelectBlock={() => this.handleSelectBlock(item)}
         />
@@ -86,7 +84,7 @@ class MainContent extends React.Component {
           <ModalWindow
             hideWindow={this.hideWindow}
             selectedBlock={this.state.selectedBlock}
-            editSelectBlock={this.state.editSelectBlock}
+            editSelectBlock={this.editSelectBlock}
           />
         ) : null}
         {userLoans}
