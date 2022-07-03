@@ -1,16 +1,23 @@
 import React from "react";
 import jsonData from "../../Data/current-loans.json";
-import { heandleClick } from "../../Data/ProjectLogic";
+import { PrepareData } from "../../Data/DataLogic";
 import ContentItem from "./ContentItem/ContentItem";
 import ModalWindow from "./ContentItem/ModalWindow";
 import "./MainContent.css";
+import _ from 'lodash';
+
+
 
 class MainContent extends React.Component {
   state = {
     showWindow: false,
-    loansArr: jsonData.loans,
+    loansArr: PrepareData(jsonData.loans),
     selectedBlock: {}
   };
+
+  sumAvailable = () => {
+    return _.sumBy(this.state.loansArr, element => element.available)
+  }
 
   showWindow = () => {
     this.setState((state) => {
@@ -42,6 +49,8 @@ class MainContent extends React.Component {
     window.removeEventListener("keyup", this.heandleEscape);
   }
   
+
+
   handleSelectBlock =(block)=>{
     this.setState((state) => {
       return {
@@ -80,7 +89,7 @@ class MainContent extends React.Component {
               <p>Total amount available for investment:</p>
             </div>
             <div className="coast">
-              <span>$238,456</span>
+              <span>${this.sumAvailable()}</span>
             </div>
           </div>
         </div>
