@@ -38,7 +38,7 @@ const ContentItem = (props) => {
             className="button"
             id="btn"
           >
-            INVEST
+            <p>INVEST</p>
           </button>
         </div>
       </div>

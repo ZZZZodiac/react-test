@@ -15,6 +15,15 @@ class ModalWindow extends React.Component {
     });
   };
 
+  saveBlock = (e) =>{
+    e.preventDefault()
+    const block = {
+      available: this.state.investment_amount
+    }
+
+    this.props.editSelectBlock(block)
+  }
+
   render() {
     const hideWindow = this.props.hideWindow;
     return (
@@ -22,7 +31,7 @@ class ModalWindow extends React.Component {
         <div className="modal-widdow">
           <form action="" className="form-items">
             <div>
-              <button className="cross" onClick={() => hideWindow()}>
+              <button type="button" className="cross" onClick={() => hideWindow()}>
                 &#10006;
               </button>
             </div>
@@ -56,8 +65,8 @@ class ModalWindow extends React.Component {
                 />
               </div>
               <div>
-                <button className="button" onClick={() => hideWindow()}>
-                  invest
+                <button type="button" className="button" onClick={() => hideWindow()}>
+                  <p>invest</p>
                 </button>
               </div>
             </div>

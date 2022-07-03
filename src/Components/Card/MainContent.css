@@ -1,6 +1,7 @@
 
 
 
+
 .main-items{
     border: 1px solid #303247;
     border-radius: 5px;
@@ -57,7 +58,7 @@
 }
 
 .amount{
-    margin: 0 auto 100% 64px;
+    margin-bottom: auto;
     padding: 0;
     bottom: 0;
     

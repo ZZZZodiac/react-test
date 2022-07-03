@@ -4,20 +4,18 @@ import { PrepareData } from "../../Data/DataLogic";
 import ContentItem from "./ContentItem/ContentItem";
 import ModalWindow from "./ContentItem/ModalWindow";
 import "./MainContent.css";
-import _ from 'lodash';
-
-
+import _ from "lodash";
 
 class MainContent extends React.Component {
   state = {
     showWindow: false,
     loansArr: PrepareData(jsonData.loans),
-    selectedBlock: {}
+    selectedBlock: {},
   };
 
   sumAvailable = () => {
-    return _.sumBy(this.state.loansArr, element => element.available)
-  }
+    return _.sumBy(this.state.loansArr, (element) => element.available);
+  };
 
   showWindow = () => {
     this.setState((state) => {
@@ -48,19 +46,25 @@ class MainContent extends React.Component {
   componentWillUnmount() {
     window.removeEventListener("keyup", this.heandleEscape);
   }
-  
 
-
-  handleSelectBlock =(block)=>{
+  handleSelectBlock = (block) => {
     this.setState((state) => {
       return {
-        selectedBlock: block
+        selectedBlock: block,
       };
     });
-  }
+  };
+
+  editSelectBlock = (updateBlock) => {
+    const temp = [...this.state.loansArr];
+    temp = updateBlock;
+    console.log(temp);
+    this.this.setState({
+      loansArr: temp,
+    });
+  };
 
   render() {
-    console.log(this.state.selectedBlock)
     const userLoans = this.state.loansArr.map((item) => {
       return (
         <ContentItem
@@ -72,14 +76,18 @@ class MainContent extends React.Component {
           ltv={item.ltv}
           amount={item.amount}
           showWindow={() => this.showWindow()}
-          handleSelectBlock = {()=>this.handleSelectBlock(item)}
+          handleSelectBlock={() => this.handleSelectBlock(item)}
         />
       );
     });
     return (
       <>
         {this.state.showWindow ? (
-          <ModalWindow hideWindow={this.hideWindow} selectedBlock={this.state.selectedBlock}/>
+          <ModalWindow
+            hideWindow={this.hideWindow}
+            selectedBlock={this.state.selectedBlock}
+            editSelectBlock={this.state.editSelectBlock}
+          />
         ) : null}
         {userLoans}
 
